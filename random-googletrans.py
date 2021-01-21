@@ -50,7 +50,7 @@ def breaktranslation():
             withlist = True
             inloop = False
         else:
-            print("Not a valid answer. Please enter of the numbers")
+            print("Not a valid answer. Please enter one of the numbers")
 
     if withlist == True:
         answer = input("Enter the list of languages. Each ISO-639-1 Code should be seperated by ';'\nFor example: en;de;es;fr;la\nThe Language the text is in will be appended automatically\n")
