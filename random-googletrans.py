@@ -25,8 +25,8 @@ def stringlengthhex(stringtocount):
 def breaktranslation():
     '''
     Diese Funktion übersetzt, wie oft der Benutzer will, einen String durch
-    mehrere zufällige Sprachen durch googletrans. Das Ziel ist, dass am Ende totaler Blödsinn rauskommt
-    TODO: Eine Liste an Sprachen vom Benutzer festlegen lassen
+    mehrere zufällige Sprachen durch googletrans. Das Ziel ist, dass am Ende totaler Blödsinn rauskommt.
+    Kann auch eine Liste an Sprachen nehmen
     '''
 
     translator = Translator()
