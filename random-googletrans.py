@@ -73,7 +73,7 @@ def breaktranslation():
 
             priorlang = nextlang
 
-            #Um es zu verhindern, dass man kurzzeitig "geblock" wird. Verhindert es nicht komplett,
+            #Um es zu verhindern, dass man kurzzeitig "geblockt" wird. Verhindert es nicht komplett,
             #aber ich versuche alles um das irgendwie zu umgehen
             time.sleep(0.5)
 
