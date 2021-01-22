@@ -1,6 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #Google Translator "Breaker" by https://github.com/quasarKroete
 #originally made to mess up the .lang file from Galaxy on Fire 2
+#This uses googletrans3.1.0a0 to prevent AttributeError: 'NoneType' object has no attribute 'group' https://stackoverflow.com/a/65109346/15056366
+#pip install googletrans==3.1.0a0
 import random
 import time
 import googletrans
