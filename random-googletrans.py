@@ -57,11 +57,60 @@ def breaktranslation():
     if withlist == True:
         answer = input("Enter the list of languages. Each ISO-639-1 Code should be seperated by ';'\nFor example: en;de;es;fr;la\nThe Language the text is in will be appended automatically\n")
         listoflangs = answer.split(";")
-    
+
+    inloop = True
+    while inloop == True:
+        retranslation = str(input("Do you want to enable retranslation? (The retranslation will not be used in the translations after it)\n1: Yes\n2: No\n"))
+        if retranslation == "1":
+            retranslation = True
+            inloop = False
+        elif retranslation == "2":
+            retranslation = False
+            inloop = False
+        else:
+            print("Not a valid answer. Please enter one of the numbers")
+
 
     priorlang = mainlang
 
-    if withlist == False:
+    if withlist == False and retranslation == True:
+        #number of translations
+        numoftrans = int(input("How many times do you want it to be translated?\n"))
+        print(stringuntranslated)
+        stringlengthhex(stringuntranslated)
+        for i in range(0, numoftrans):
+
+            nextlang = random.choice(list(googletrans.LANGUAGES))
+            print(priorlang + "->" + nextlang)
+            
+            translation = translator.translate(stringfortrans, src = priorlang, dest = nextlang)
+            
+            #Experimental
+            TranslationInMainlang = translator.translate(translation.text, src = nextlang, dest = mainlang)
+            print(TranslationInMainlang.text)
+
+            priorlang = nextlang
+
+            #Um es zu verhindern, dass man kurzzeitig "geblockt" wird. Verhindert es nicht komplett,
+            #aber ich versuche alles um das irgendwie zu umgehen
+            time.sleep(0.5)
+
+            stringfortrans = translation.text
+
+        finaltext = translator.translate(stringfortrans, dest = mainlang)
+        print(priorlang + "->" + mainlang)
+        if finaltext.text == stringuntranslated:
+            #Fehler, der erscheint wenn man zu schnell/oft übersetzt. Ich hab zwar kaum Ahnung von Servern und sowas,
+            #aber ich schätze dass es damit zu tun hat, dass zu schnell zu oft Sachen an die Google-Server geschickt werden,
+            #was dazu führt, dass ich kurz "blockiert" werde.
+            print("String could not be translated. Please try again later")
+            print("\nResult: \n"+ finaltext.text+ "\n")
+
+        else:
+            print("\nResult: \n"+ finaltext.text+ "\n")
+            stringlengthhex(finaltext.text)
+
+    elif withlist == False and retranslation == False:
         #number of translations
         numoftrans = int(input("How many times do you want it to be translated?\n"))
         print(stringuntranslated)
@@ -94,7 +143,42 @@ def breaktranslation():
             print("\nResult: \n"+ finaltext.text+ "\n")
             stringlengthhex(finaltext.text)
     
-    elif withlist == True:
+    elif withlist == True and retranslation == True:
+        print(stringuntranslated)
+        stringlengthhex(stringuntranslated)
+        for i in listoflangs:
+
+            nextlang = i
+            print(priorlang + "->" + nextlang)
+            
+            translation = translator.translate(stringfortrans, src = priorlang, dest = nextlang)
+
+            #Experimental
+            TranslationInMainlang = translator.translate(translation.text, src = nextlang, dest = mainlang)
+            print(TranslationInMainlang.text)
+
+            priorlang = nextlang
+
+            #Um es zu verhindern, dass man kurzzeitig "geblock" wird. Verhindert es nicht komplett,
+            #aber ich versuche alles um das irgendwie zu umgehen
+            time.sleep(0.2)
+
+            stringfortrans = translation.text
+
+        finaltext = translator.translate(stringfortrans, dest = mainlang)
+        print(priorlang + "->" + mainlang)
+        if finaltext.text == stringuntranslated:
+            #Fehler, der erscheint wenn man zu schnell/oft übersetzt. Ich hab zwar kaum Ahnung von Servern und sowas,
+            #aber ich schätze dass es damit zu tun hat, dass zu schnell zu oft Sachen an die Google-Server geschickt werden,
+            #was dazu führt, dass ich kurz "blockiert" werde.
+            print("String could not be translated. Please try again later")
+            print("\nResult: \n"+ finaltext.text+ "\n")
+
+        else:
+            print("\nResult: \n"+ finaltext.text+ "\n")
+            stringlengthhex(finaltext.text)
+
+    elif withlist == True and retranslation == False:
         print(stringuntranslated)
         stringlengthhex(stringuntranslated)
         for i in listoflangs:
@@ -108,7 +192,7 @@ def breaktranslation():
 
             #Um es zu verhindern, dass man kurzzeitig "geblock" wird. Verhindert es nicht komplett,
             #aber ich versuche alles um das irgendwie zu umgehen
-            time.sleep(0.5)
+            time.sleep(0.2)
 
             stringfortrans = translation.text
 
@@ -127,6 +211,7 @@ def breaktranslation():
 
     else:
         print("Something went wrong")
+
 
 #mainloop
 #Kleine Input möglichkeit, weil ich es cool fand
