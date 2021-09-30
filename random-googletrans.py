@@ -212,7 +212,7 @@ def breakTranslation():
 
 # mainloop
 # Kleine Input möglichkeit, weil ich es cool fand
-while isquit == False:
+while isQuit == False:
 
     antwort = input("What do you want to do?\n1: 'translate'\n2: count\n3: quit\nEnter of one the numbers: ")
 
